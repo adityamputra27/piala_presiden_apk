@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
   Future<void> requestPermission() async {
     FirebaseNotificationService().requestNotificationPermission((isGranted) {
       if (kDebugMode) {
-        print('success');
+        print(isGranted);
       }
     });
 

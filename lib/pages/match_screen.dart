@@ -251,14 +251,14 @@ class _MatchScreenState extends State<MatchScreen>
   }
 
   Widget _buildBannerAd3() {
-    return (_bannerAd2 != null)
+    return (_bannerAd3 != null)
         ? Align(
           alignment: Alignment.bottomCenter,
           child: Container(
             margin: const EdgeInsets.only(bottom: 16, top: 4),
             width: _bannerAd3!.size.width.toDouble(),
             height: _bannerAd3!.size.height.toDouble(),
-            child: AdWidget(ad: _bannerAd2!),
+            child: AdWidget(ad: _bannerAd3!),
           ),
         )
         : Container();
@@ -734,6 +734,7 @@ class _MatchScreenState extends State<MatchScreen>
             groupG.isNotEmpty ? buildGroupTable("G", groupG) : const SizedBox(),
             groupH.isNotEmpty ? buildGroupTable("H", groupH) : const SizedBox(),
             groupI.isNotEmpty ? buildGroupTable("I", groupI) : const SizedBox(),
+            groupJ.isNotEmpty ? buildGroupTable("J", groupJ) : const SizedBox(),
           ],
         ),
       ),

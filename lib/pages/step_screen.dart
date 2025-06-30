@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:piala_presiden_apk/constants/font_style.dart';
 import 'package:piala_presiden_apk/pages/home_screen.dart';
+import 'package:piala_presiden_apk/services/firebase_notification_service.dart';
 import 'package:piala_presiden_apk/widgets/ad_info_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../constants/color.dart';
@@ -72,6 +74,18 @@ class _StepScreenState extends State<StepScreen> {
   void initState() {
     super.initState();
     _showAdInfoIfFirstTime();
+    requestPermission();
+  }
+
+  Future<void> requestPermission() async {
+    FirebaseNotificationService().requestNotificationPermission((isGranted) {
+      if (kDebugMode) {
+        print('success');
+      }
+    });
+
+    FirebaseNotificationService().firebaseInit(context);
+    FirebaseNotificationService().isTokenRefresh();
   }
 
   Future<void> _showAdInfoIfFirstTime() async {

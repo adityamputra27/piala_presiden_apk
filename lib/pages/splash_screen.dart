@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:piala_presiden_apk/constants/font_style.dart';
 import 'package:piala_presiden_apk/pages/home_screen.dart';
@@ -23,10 +24,10 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     animationLoaded();
-    redirectToMainPage();
+    _startSplashLogic();
   }
 
-  void animationLoaded() async {
+  void animationLoaded() {
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1200),
@@ -35,24 +36,28 @@ class _SplashScreenState extends State<SplashScreen>
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
   }
 
-  Future<void> redirectToMainPage() async {
-    FirebaseNotificationService().requestNotificationPermission((isGranted) {
-      Timer(const Duration(seconds: 3), () async {
-        final SharedPreferences sharedPreferences =
-            await SharedPreferences.getInstance();
-
-        final isOnBoardingLoaded =
-            sharedPreferences.getBool('isOnBoardingLoaded') ?? false;
-
-        if (isOnBoardingLoaded) {
-          Navigator.pushReplacementNamed(context, '/home');
-        } else {
-          Navigator.pushReplacementNamed(context, '/onboarding');
-        }
-      });
+  Future<void> _startSplashLogic() async {
+    FirebaseNotificationService().requestNotificationPermission((onGranted) {
+      if (kDebugMode) {
+        print(onGranted);
+      }
     });
     FirebaseNotificationService().firebaseInit(context);
     FirebaseNotificationService().isTokenRefresh();
+
+    await Future.delayed(const Duration(milliseconds: 1800));
+
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    final isOnBoardingLoaded =
+        sharedPreferences.getBool('isOnBoardingLoaded') ?? false;
+
+    if (!mounted) return;
+    if (isOnBoardingLoaded) {
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      Navigator.pushReplacementNamed(context, '/onboarding');
+    }
   }
 
   @override
@@ -76,16 +81,7 @@ class _SplashScreenState extends State<SplashScreen>
                 Container(
                   width: 140,
                   height: 140,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    // boxShadow: [
-                    //   BoxShadow(
-                    //     color: Colors.grey.withOpacity(0.5),
-                    //     blurRadius: 15,
-                    //     offset: const Offset(0, 2),
-                    //   ),
-                    // ],
-                  ),
+                  decoration: BoxDecoration(shape: BoxShape.circle),
                   padding: const EdgeInsets.all(10),
                   child: ClipOval(
                     child: Image.asset(
