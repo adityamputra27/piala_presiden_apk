@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "553595275319",
+    "project_id": "piala-presiden-app",
+    "storage_bucket": "piala-presiden-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553595275319:android:a95ac5e1ef4a1072b497b2",
+        "android_client_info": {
+          "package_name": "com.dittmptrr27.piala_presiden_apk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCbuO10FzzVCk37GUSmSfvU30Ozr6YSIc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
