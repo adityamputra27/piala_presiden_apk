@@ -148,10 +148,10 @@ class _PlayersScreenState extends State<PlayersScreen> {
                         style: AppTextStyle.label.copyWith(fontSize: 12),
                       ),
                       const SizedBox(width: 10),
-                      Text(
-                        '${player['weight_kg'] ?? '-'} kg',
-                        style: AppTextStyle.label.copyWith(fontSize: 12),
-                      ),
+                      // Text(
+                      //   '${player['weight_kg'] ?? '-'} kg',
+                      //   style: AppTextStyle.label.copyWith(fontSize: 12),
+                      // ),
                     ],
                   ),
                 ],
