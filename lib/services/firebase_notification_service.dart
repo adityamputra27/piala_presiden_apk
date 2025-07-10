@@ -34,13 +34,19 @@ Future<void> showNotification(RemoteMessage message) async {
         icon: '@drawable/ic_notification',
         channel.id.toString(),
         channel.name.toString(),
-        importance: Importance.high,
-        priority: Priority.high,
+        importance: Importance.max,
+        priority: Priority.max,
         playSound: true,
         ticker: 'ticker',
         color: const Color(0xff0A141B),
         colorized: true,
       );
+
+  await _flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin
+      >()
+      ?.createNotificationChannel(channel);
 
   const DarwinNotificationDetails darwinNotificationDetails =
       DarwinNotificationDetails(
